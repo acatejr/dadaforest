@@ -15,10 +15,19 @@ from pathlib import Path
 import dj_database_url
 
 DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
-if DEVELOPMENT_MODE == "dadaforest.local":
+if DEVELOPMENT_MODE == True or DEVELOPMENT_MODE == "True":
     from dotenv import load_dotenv
 
     load_dotenv()
+
+    POSTGRES_USER = os.environ.get("POSTGRES_USER")
+    POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD")
+    POSTGRES_HOST = os.environ.get("POSTGRES_HOST")
+    POSTGRES_PORT = os.environ.get("POSTGRES_PORT")
+    DATABASE_URL = f"postgres://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}/postgres"
+
+else:
+    DATABASE_URL = os.environ.get("DATABASE_URL")
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -32,9 +41,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-#3=ik7gevz8uu@w(228y(!y9m3+=+9f@4%gfz8r=$&iy231vd)"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DJANGO_DEBUG", True)
+if DEBUG in ["False", "false", 0, "0"]:
+    DEBUG=False
+else:
+    DEBUG=True
 
-# ALLOWED_HOSTS = []
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(",")
 
 # Application definition
@@ -83,13 +95,9 @@ WSGI_APPLICATION = "dadaforest.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-POSTGRES_USER = os.environ.get("POSTGRES_USER")
-POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD")
-POSTGRES_HOST = os.environ.get("POSTGRES_HOST")
-POSTGRES_PORT = os.environ.get("POSTGRES_PORT")
 DATABASES = {
     "default": dj_database_url.config(
-        default=f"postgres://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}/postgres",
+        default=DATABASE_URL,
         conn_max_age=600,
         conn_health_checks=True,
     )

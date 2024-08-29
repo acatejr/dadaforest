@@ -31,7 +31,7 @@ class AssetAdmin(admin.ModelAdmin):
     ordering = ["pk"]
     list_display = ["id", "title", "domain", "short_descr"]
     list_filter = ["domain"]
-    inlines = [KeywordsInline]
+    # inlines = [KeywordsInline]
     list_per_page = 20
 
 

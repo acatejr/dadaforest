@@ -18,6 +18,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.views.generic.base import RedirectView
+import config
 
 urlpatterns = [
     path("", RedirectView.as_view(url="/admin")),

@@ -14,9 +14,8 @@ import os
 from pathlib import Path
 import dj_database_url
 
-APP_NAME = os.environ.get("APP_NAME")
-
-if APP_NAME == "dadaforest.local":
+DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
+if DEVELOPMENT_MODE == "dadaforest.local":
     from dotenv import load_dotenv
 
     load_dotenv()
@@ -138,7 +137,7 @@ STATIC_ROOT = os.environ.get("DJANGO_STATIC_ROOT", "static")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-if APP_NAME == "dadaforest.local":
+if DEVELOPMENT_MODE == "dadaforest.local":
     CSRF_TRUSTED_ORIGINS = [
         f"http://{h}" for h in os.environ.get("DJANGO_ALLOWED_HOSTS").split(",")
     ]

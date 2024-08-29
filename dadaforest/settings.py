@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 import dj_database_url
+from django.core.management.utils import get_random_secret_key
 
 DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
 if DEVELOPMENT_MODE == True or DEVELOPMENT_MODE == "True":
@@ -38,7 +39,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-#3=ik7gevz8uu@w(228y(!y9m3+=+9f@4%gfz8r=$&iy231vd)"
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DJANGO_DEBUG", True)

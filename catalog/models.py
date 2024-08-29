@@ -81,58 +81,58 @@ class Domain(BaseModel):
         return truncatechars(self.description, 50)
 
 
-# class Asset(BaseModel):
-#     class Meta:
-#         db_table = "assets"
+class Asset(BaseModel):
+    class Meta:
+        db_table = "assets"
 
-#     metadata_url = models.CharField(
-#         max_length=1500,
-#         unique=True,
-#         null=True,
-#         blank=True,
-#         help_text="The url used to access/retrieve the metadata.",
-#     )
+    metadata_url = models.CharField(
+        max_length=1500,
+        unique=True,
+        null=True,
+        blank=True,
+        help_text="The url used to access/retrieve the metadata.",
+    )
 
-#     title = models.CharField(
-#         max_length=150,
-#         unique=True,
-#         null=True,
-#         blank=True,
-#         help_text="Name describing the asset",
-#     )
+    title = models.CharField(
+        max_length=150,
+        unique=True,
+        null=True,
+        blank=True,
+        help_text="Name describing the asset",
+    )
 
-#     description = models.CharField(
-#         max_length=3000,
-#         unique=False,
-#         null=True,
-#         blank=True,
-#         help_text="The description of the metadata document.",
-#     )
+    description = models.CharField(
+        max_length=3000,
+        unique=False,
+        null=True,
+        blank=True,
+        help_text="The description of the metadata document.",
+    )
 
-#     domain = models.ForeignKey(Domain, on_delete=models.DO_NOTHING)
+    domain = models.ForeignKey(Domain, on_delete=models.DO_NOTHING)
 
-#     modified = models.DateTimeField(
-#         null=True, blank=True, help_text="Date metadata was last modified."
-#     )
+    modified = models.DateTimeField(
+        null=True, blank=True, help_text="Date metadata was last modified."
+    )
 
-#     @property
-#     def short_descr(self):
-#         return truncatechars(self.description, 75)
+    @property
+    def short_descr(self):
+        return truncatechars(self.description, 75)
 
-#     @property
-#     def short_url(self):
-#         return truncatechars(self.metadata_url, 50)
+    @property
+    def short_url(self):
+        return truncatechars(self.metadata_url, 50)
 
-#     def __str__(self) -> str:
-#         return f"{self.title}"
+    def __str__(self) -> str:
+        return f"{self.title}"
 
 
-# class Keyword(BaseModel):
-#     class Meta:
-#         db_table = "keywords"
+class Keyword(BaseModel):
+    class Meta:
+        db_table = "keywords"
 
-#     word = models.CharField(max_length=250)
-#     assets = models.ManyToManyField(Asset)
+    word = models.CharField(max_length=250)
+    assets = models.ManyToManyField(Asset)
 
-#     def __str__(self) -> str:
-#         return f"{self.word}"
+    def __str__(self) -> str:
+        return f"{self.word}"

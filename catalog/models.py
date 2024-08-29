@@ -17,68 +17,68 @@ class SearchTerm(BaseModel):
     term = models.CharField(max_length=2000, blank=False)
 
 
-# class Domain(BaseModel):
-#     """Domain objects.  All are technically sub-domains to the 1 root domain."""
+class Domain(BaseModel):
+    """Domain objects.  All are technically sub-domains to the 1 root domain."""
 
-#     class Meta:
-#         db_table = "domains"
+    class Meta:
+        db_table = "domains"
 
-#     name = models.CharField(
-#         max_length=250, unique=True, null=False, help_text="Domain name (required)"
-#     )
+    name = models.CharField(
+        max_length=250, unique=True, null=False, help_text="Domain name (required)"
+    )
 
-#     description = models.CharField(
-#         max_length=500,
-#         unique=False,
-#         null=True,
-#         help_text="Domain name description (optional)",
-#     )
+    description = models.CharField(
+        max_length=500,
+        unique=False,
+        null=True,
+        help_text="Domain name description (optional)",
+    )
 
-#     root_domain = models.CharField(
-#         unique=False,
-#         null=False,
-#         blank=False,
-#         default="usfs",
-#         choices=[["usfs", "United States Forest Service"]],
-#     )
+    root_domain = models.CharField(
+        unique=False,
+        null=False,
+        blank=False,
+        default="usfs",
+        choices=[["usfs", "United States Forest Service"]],
+    )
 
-#     host_system_name = models.CharField(
-#         max_length=500,
-#         unique=False,
-#         null=True,
-#         blank=True,
-#         help_text="System name currently hosting the data (i.e. Redshift,  Oracle)",
-#     )
+    host_system_name = models.CharField(
+        max_length=500,
+        unique=False,
+        null=True,
+        blank=True,
+        help_text="System name currently hosting the data (i.e. Redshift,  Oracle)",
+    )
 
-#     host_system_type = models.CharField(
-#         max_length=500,
-#         unique=False,
-#         null=True,
-#         blank=True,
-#         help_text="System type currently hosting the data",
-#     )
+    host_system_type = models.CharField(
+        max_length=500,
+        unique=False,
+        null=True,
+        blank=True,
+        help_text="System type currently hosting the data",
+    )
 
-#     DATA_FORMAT_CHOICES = (
-#         ("TABULAR", "Tabular"),
-#         ("TABULAR_AND_GEOSPATIAL", "Tabular and Geospatial"),
-#         ("GEOSPATIAL", "Geospatial"),
-#         ("N/A", "N/A"),
-#     )
+    DATA_FORMAT_CHOICES = (
+        ("TABULAR", "Tabular"),
+        ("TABULAR_AND_GEOSPATIAL", "Tabular and Geospatial"),
+        ("GEOSPATIAL", "Geospatial"),
+        ("N/A", "N/A"),
+    )
 
-#     format = models.CharField(
-#         max_length=125,
-#         unique=False,
-#         null=True,
-#         help_text="The data format",
-#         choices=DATA_FORMAT_CHOICES,
-#     )
+    format = models.CharField(
+        max_length=125,
+        unique=False,
+        null=True,
+        help_text="The data format",
+        choices=DATA_FORMAT_CHOICES,
+    )
 
-#     def __str__(self) -> str:
-#         return f"{self.name}"
+    def __str__(self) -> str:
+        return f"{self.name}"
 
-#     @property
-#     def short_descr(self):
-#         return truncatechars(self.description, 50)
+    @property
+    def short_descr(self):
+        return truncatechars(self.description, 50)
 
 
 # class Asset(BaseModel):

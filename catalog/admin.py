@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import SearchTerm
+from .models import SearchTerm, Domain
 
 @admin.register(SearchTerm)
 class SearchTermAdmin(admin.ModelAdmin):
@@ -8,4 +8,37 @@ class SearchTermAdmin(admin.ModelAdmin):
         "id",
         "term",
     ]
+
+
+@admin.register(Domain)
+class DomainAdmin(admin.ModelAdmin):
+    ordering = ["pk"]
+    # inlines = [AssetInline]
+    list_display = ["id", "name", "root_domain"]
+
+
+# class KeywordsInline(admin.TabularInline):
+#     model = Keyword.assets.through
+
+
+# class AssetInline(admin.TabularInline):
+#     model = Asset
+#     fields = ["title"]
+
+
+# @admin.register(Asset)
+# class AssetAdmin(admin.ModelAdmin):
+#     ordering = ["pk"]
+#     list_display = ["id", "title", "domain", "short_descr"]
+#     list_filter = ["domain"]
+#     inlines = [KeywordsInline]
+#     list_per_page = 20
+
+
+# @admin.register(Keyword)
+# class KeywordAdmin(admin.ModelAdmin):
+#     ordering = ["word"]
+#     list_display = ["id", "word"]
+#     list_per_page = 25
+
 

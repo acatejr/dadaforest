@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import SearchTerm, Domain, Asset, Keyword
 
+
 class KeywordsInline(admin.TabularInline):
     model = Keyword.assets.through
 
@@ -40,5 +41,3 @@ class KeywordAdmin(admin.ModelAdmin):
     ordering = ["word"]
     list_display = ["id", "word"]
     list_per_page = 25
-
-

@@ -25,7 +25,9 @@ if DEVELOPMENT_MODE == True or DEVELOPMENT_MODE == "True":
     POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD")
     POSTGRES_HOST = os.environ.get("POSTGRES_HOST")
     POSTGRES_PORT = os.environ.get("POSTGRES_PORT")
-    DATABASE_URL = f"postgres://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}/postgres"
+    DATABASE_URL = (
+        f"postgres://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}/postgres"
+    )
 
 else:
     DATABASE_URL = os.environ.get("DATABASE_URL")
@@ -44,9 +46,9 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", get_random_secret_key())
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DJANGO_DEBUG", True)
 if DEBUG in ["False", "false", 0, "0"]:
-    DEBUG=False
+    DEBUG = False
 else:
-    DEBUG=True
+    DEBUG = True
 
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(",")
 

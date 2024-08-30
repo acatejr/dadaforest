@@ -14,10 +14,8 @@ class AssetInline(admin.TabularInline):
 @admin.register(SearchTerm)
 class SearchTermAdmin(admin.ModelAdmin):
     ordering = ["pk"]
-    list_display = [
-        "id",
-        "term",
-    ]
+    list_display = ["id", "term",]
+    list_filter = ["term"]
 
 
 @admin.register(Domain)
@@ -32,7 +30,6 @@ class AssetAdmin(admin.ModelAdmin):
     ordering = ["pk"]
     list_display = ["id", "title", "domain", "short_descr"]
     list_filter = ["domain"]
-    # inlines = [KeywordsInline]
     list_per_page = 20
 
 
@@ -40,4 +37,5 @@ class AssetAdmin(admin.ModelAdmin):
 class KeywordAdmin(admin.ModelAdmin):
     ordering = ["word"]
     list_display = ["id", "word"]
+    list_filter = ["word"]
     list_per_page = 25

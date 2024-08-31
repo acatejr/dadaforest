@@ -14,6 +14,9 @@ import os
 from pathlib import Path
 import dj_database_url
 from django.core.management.utils import get_random_secret_key
+from dotenv import load_dotenv
+
+load_dotenv()
 
 DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
 if DEVELOPMENT_MODE == True or DEVELOPMENT_MODE == "True":

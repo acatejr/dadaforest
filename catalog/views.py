@@ -1,11 +1,19 @@
 from django.shortcuts import render
 from django.views.generic import ListView
+from django.views.generic import DetailView
 from django.views.generic.edit import FormMixin
 from django.db.models import Q
 
 from .models import Asset, SearchTerm
 from .forms import AssetSimpleSerchForm
 
+
+class AssetDetailView(DetailView):
+    queryset = Asset.objects.all()
+
+    def get_object(self):
+        obj = super().get_object()
+        return obj
 
 class AssetSearchResults(ListView, FormMixin):
     model = Asset
@@ -42,3 +50,14 @@ class AssetSearchResults(ListView, FormMixin):
         context = self.get_context_data()
 
         return self.render_to_response(context)
+
+
+# class AuthorDetailView(DetailView):
+#     queryset = Author.objects.all()
+
+#     def get_object(self):
+#         obj = super().get_object()
+#         # Record the last accessed date
+#         obj.last_accessed = timezone.now()
+#         obj.save()
+#         return obj

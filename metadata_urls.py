@@ -226,3 +226,11 @@ fsgeodata_urls = [
     "https://data.fs.usda.gov/geodata/edw/edw_resources/meta/S_USA.Actv_SilvReforestation_Needs.xml",
     "https://data.fs.usda.gov/geodata/edw/edw_resources/meta/S_USA.Actv_SilvTSI_Needs.xml",
 ]
+
+crv_urls = [
+    "https://apps.fs.usda.gov/fsgisx05/rest/services/wo_nfs_gtac/EDW_ForestSystemBoundaries_01/MapServer?f=pjson",
+    "https://apps.fs.usda.gov/fsgisx02/rest/services/wo_nfs_gstc/WO_OSC_GapAnalysis_Climate/MapServer?f=pjson",
+    "https://services1.arcgis.com/gGHDlz6USftL5Pau/arcgis/rest/services/Firesheds_with_NFS_Lands_in_the_West_view/FeatureServer/0?f=pjson",
+    "https://apps.fs.usda.gov/fsgisx02/rest/services/wo_nfs_gstc/WO_OSC_GapAnalysis_OldGrowthAndMatureForests/MapServer?f=pjson",
+    "https://apps.fs.usda.gov/arcx/rest/services/wo_nrm_iweb/NRM_WCATTWatershedCondAssess/MapServer?f=pjson",
+]

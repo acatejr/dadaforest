@@ -1,0 +1,10 @@
+# arrow
+# pytest
+# pytest-sugar
+# pytest-django
+# requests
+# ruff
+# psycopg2-binary
+# bs4
+# python-dotenv
+# lxml

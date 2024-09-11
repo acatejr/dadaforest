@@ -1,15 +1,8 @@
-from datetime import datetime
-
-from sqlalchemy import and_
 from sqlalchemy import Column
-from sqlalchemy import create_engine
-from sqlalchemy import DateTime
-from sqlalchemy import Float
 from sqlalchemy import ForeignKey
 from sqlalchemy import Integer
 from sqlalchemy import String, Text, Enum
 from sqlalchemy.orm import relationship, DeclarativeBase
-from sqlalchemy.orm import Session
 import enum
 
 
@@ -40,8 +33,12 @@ class Asset(Base):
         Enum(Visibility), nullable=False, unique=False, default=Visibility.PUBLIC
     )
     domain = Column(Enum(Domains), nullable=False, default=Domains.EDW)
+    keywords = relationship(
+        "AssetKeyword", cascade="all, delete-orphan", backref="asset"
+    )
 
-    def __init__(self, title, description=None, metadata_url=None):
+    def __init__(self, title, description=None, metadata_url=None, domain=Domains.EDW):
+        self.domain = domain
         self.title = title
         if description:
             self.description = description
@@ -55,23 +52,30 @@ class Asset(Base):
         return f"Asset({self.title})"
 
 
-if __name__ == "__main__":
-    engine = create_engine("sqlite:///catalog.db")
-    Base.metadata.create_all(engine)
-    # session = Session(autoflush=True, bind=engine)
+class Keyword(Base):
+    __tablename__ = "keyword"
 
-    # assets = []
-    # for i in range(0, 100):
-    #     assets.append(
-    #         Asset(
-    #             title=f"Asset Title {i}",
-    #             description=f"Description {i}",
-    #             metadata_url=f"https://{i}",
-    #         )
-    #     )
+    id = Column(Integer, primary_key=True)
+    word = Column(String(300), nullable=False, unique=False)
 
-    # session.add_all(assets)
-    # session.commit()
+    def __init__(self, word):
+        self.word = word
 
-    # assets = session.query(Asset).all()
-    # print(assets)
+    def __str__(self):
+        return f"{self.word}"
+
+    def __repr__(self):
+        return f"Asset({self.word})"
+
+
+class AssetKeyword(Base):
+    __tablename__ = "assetkeyword"
+
+    asset_id = Column(Integer, ForeignKey("asset.id"), primary_key=True)
+    keyword_id = Column(Integer, ForeignKey("keyword.id"), primary_key=True)
+
+    def __init__(self, keyword, word=None):
+        self.keyword = keyword
+        self.word = word
+
+    keyword = relationship(Keyword, lazy="joined")
